@@ -77,4 +77,4 @@ async function getTicketInfo(issueCode: string) {
   await getTicketInfo(ticket)
 })()
 
-// Example: node index "TICKET-123"
+// Example: ./index TICKET-123
