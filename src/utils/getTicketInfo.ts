@@ -1,11 +1,32 @@
 import axios from 'axios'
-import chalk from 'chalk'
+
+export interface Ticket {
+  key: string
+  fields: {
+    summary: string
+    parent: {
+      key: string
+      fields: {
+        summary: string
+      }
+    }
+    status: {
+      statusCategory: {
+        key: string
+        colorName: string
+      }
+    }
+    priority: {
+      name: string
+    }
+  }
+}
 
 async function getTicketInfo(issueCode: string) {
   const theString = `${process.env.JIRA_EMAIL}:${process.env.JIRA_TOKEN}`
   const base64 = Buffer.from(theString).toString('base64')
 
-  const res = await axios.get(
+  const res = await axios.get<Ticket>(
     `https://${process.env.JIRA_DOMAIN}.atlassian.net/rest/api/3/issue/${issueCode}`,
     {
       headers: {
@@ -25,7 +46,7 @@ async function getTicketInfo(issueCode: string) {
       },
       priority: { name: priority },
     },
-  } = await res.data
+  } = res.data
 
   const lowerCaseKey = key.toLowerCase()
   const lowerCaseSummary = summary.toLowerCase().replace(/\s/g, '-')

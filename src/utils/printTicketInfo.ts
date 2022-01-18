@@ -1,18 +1,35 @@
 import chalk from 'chalk'
 
-function printTicketInfo(ticketInfo) {
+const gB = chalk.greenBright
+const cB = chalk.cyanBright
+interface TicketInfo {
+  ticket: string
+  summary: string
+  status: {
+    state: string
+    color: string
+  }
+  priority: string
+  parent: {
+    ticket: string
+    summary: string
+  }
+  gitBranch: string
+}
+
+function printTicketInfo(ticketInfo: TicketInfo) {
   console.log(`
   
-    ${chalk.greenBright('Ticket:')} ${chalk.cyanBright(ticketInfo.ticket)}
-    ${chalk.greenBright('Summary:')} ${chalk.cyanBright(ticketInfo.summary)}
+    ${gB('Ticket:')} ${cB(ticketInfo.ticket)}
+    ${gB('Summary:')} ${cB(ticketInfo.summary)}
   
-    ${chalk.greenBright('Status:')} ${chalk.cyanBright(ticketInfo.status.state)}
-    ${chalk.greenBright('Priority:')} ${chalk.cyanBright(ticketInfo.priority)}
+    ${gB('Status:')} ${cB(ticketInfo.status.state)}
+    ${gB('Priority:')} ${cB(ticketInfo.priority)}
     
-    ${chalk.greenBright('Parent:')} ${chalk.cyanBright(ticketInfo.parent.ticket)}
-    ${chalk.greenBright('Parent Summary:')} ${chalk.cyanBright(ticketInfo.parent.summary)}
+    ${gB('Parent:')} ${cB(ticketInfo.parent.ticket)}
+    ${gB('Parent Summary:')} ${cB(ticketInfo.parent.summary)}
     
-    ${chalk.greenBright('Git Branch:')} ${chalk.cyanBright(ticketInfo.gitBranch)}
+    ${gB('Git Branch:')} ${cB(ticketInfo.gitBranch)}
   
   
     `)
