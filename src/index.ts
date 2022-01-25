@@ -1,5 +1,7 @@
-import 'dotenv/config'
+import * as dotenv from 'dotenv'
 import clipboard from 'clipboardy'
+
+dotenv.config()
 
 import { getTicketInfo } from './utils/getTicketInfo.js'
 import { printTicketInfo } from './utils/printTicketInfo.js'
@@ -9,7 +11,7 @@ import { printTicketInfo } from './utils/printTicketInfo.js'
   const flag2 = process.argv[4]
 
   if (!ticket) {
-    console.log('Please include a ticket code')
+    console.log('Please include a ticket code or link.')
     return
   }
 
